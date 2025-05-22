@@ -1,0 +1,445 @@
+// part 1    (make api)
+Day 1
+1) backend setup 
+    npm init => gives packge.json
+    add type:"module"  => js will support all feature of mjs
+    add dev:"nodemon index.js"  at script section of package.json
+    make express application , attach port to it
+2) tackle import error
+        let a = b; // import b
+        let c = d.e.f; //import d
+        let g = h.i(); //import h
+        j.k(); //import j
+        a.b(c,e)// import a ,c,e
+        a.b(c.e,f.g)// a, c, f 
+        let k =a.b("c",e.f.g,h.i()) // a, e, h
+3)
+    fronted request backend
+        url =>localhost:8000
+        c=> create =>post
+        r => read  => get
+        u => update => put|patch
+        d  => delete => delete
+        method=> post|get|patch|delete
+4) work of backend 
+        define response for each request   (api)
+                localhost:8000, post  => "i will add data to database"
+                localhost:8000, get  => "i will give data from database"
+                localhost:8000, patch  => "i will update data from database"
+                localhost:8000, delete  => "i will delete data from database"
+        To define response for each reqest 
+                make Router  
+                use that router to main file (index.js)
+5)  request form post man
+
+
+
+Day 2 
+         define response for each request   (api)
+                localhost:8000/name, post  => "i will add name to database"
+                localhost:8000/name, get  => "i will give all name from database"
+                localhost:8000/name, patch  => "i will update name from database"
+                localhost:8000/name, delete  => "i will delete name from database"
+
+         define response for each request  make different router
+                localhost:8000/dish, post  => "i will add dish to database"
+                localhost:8000/dish, get  => "i will give all dish from database"
+                localhost:8000/dish, patch  => "i will update dish from database"
+                localhost:8000/dish, delete  => "i will delete dish from database"
+         res.json 
+         pass data from post 
+         get data from post 
+                to get use   app.use(json())
+                always use it at top level
+         dynamic route   (do not learn dynamic routes in app.use("/",...))
+                .route("/a")
+                .rouee("/:id")
+                  always place dynamic route at last
+Day 3 
+        get dynamic route params 
+        url
+                route 
+                 query 
+                every thing in url is string
+        get query
+        To match only route is seen
+        make user api 
+                localhost:8000/admin, post  => {success:true, message:"admin created successfully"}
+                localhost:8000/admin, get  => {success:true, message:"admin read successfully"}
+                localhost:8000/admin/:id, get  => {success:true, message:"admin read successfully"}
+                localhost:8000/admin/:id, update  => {success:true, message:"admin updated successfully"}
+                localhost:8000/admin/:id, delete  =>  {success:true, message:"admin deleted successfully"}
+
+                localhost:8000/staff, post  => {success:true, message:"staff created successfully"}
+                localhost:8000/staff, get  => {success:true, message:"staff read successfully"}
+                localhost:8000/staff/:id, get  => {success:true, message:"staff read successfully"}
+                localhost:8000/staff/:id, update  => {success:true, message:"staff updated successfully"}
+                localhost:8000/staff/:id, delete  =>  {success:true, message:"staff deleted successfully"}
+
+
+
+                localhost:8000/order, post  => {success:true, message:"order created successfully"}
+                localhost:8000/order, get  => {success:true, message:"order read successfully"}
+                localhost:8000/order/:id, get  => {success:true, message:"order read successfully"}
+                localhost:8000/order/:id, update  => {success:true, message:"order updated successfully"}
+                localhost:8000/order/:id, delete  =>  {success:true, message:"order deleted successfully"}
+
+
+                localhost:8000/class-room, post  => {success:true, message:"class-room created successfully"}  => send  data form body and console it
+                localhost:8000/class-room, get  => {success:true, message:"class-room read successfully"} => send data from query and console it 
+                localhost:8000/class-room/:id, get  => {success:true, message:"class-room read successfully"}  => clg => params
+                localhost:8000/class-room/:id, update  => {success:true, message:"class-room updated successfully"}
+                localhost:8000/class-room/:id, delete  =>  {success:true, message:"class-room deleted successfully"}
+
+
+                localhost:8000/country, post  => {success:true, message:"country created successfully"}
+                localhost:8000/country, get  => {success:true, message:"country read successfully"}
+                localhost:8000/country/:id, get  => {success:true, message:"country read successfully"}
+                localhost:8000/country/:id, update  => {success:true, message:"country updated successfully"}
+                localhost:8000/country/:id, delete  =>  {success:true, message:"country deleted successfully"}
+
+                localhost:8000/job, post  => {success:true, message:"job created successfully"}
+                localhost:8000/job, get  => {success:true, message:"job read successfully"}
+                localhost:8000/job/:id, get  => {success:true, message:"job read successfully"}
+                localhost:8000/job/:id, update  => {success:true, message:"job updated successfully"}
+                localhost:8000/job/:id, delete  =>  {success:true, message:"job deleted successfully"}
+
+
+
+
+Day 4          
+        middleware 
+                how to trigger middleware 
+        middleware based on parameter
+                normal middleware 
+                        (req, res,next) =>{}
+                        next() is uesed to call normal middleware
+                error middleware  
+                        (err,req,res,next) =>{}
+                        next(error) is used to call error middleware
+                        
+        middleware based on  location 
+                route middleware 
+                appplication middleware 
+                        application middleware will run for ever route
+
+        what happen when api is hit
+                it execute middleware from application (main file)
+                when api is hit first it execute normal middleware
+        
+        application middleware is also known as global middleware
+
+        make global error middleware
+         make global page not found middleware
+                give response for not found url
+
+        one request has only one response
+                if one request has more that one response it thrown an error like " Cannot set headers after they are sent to the client"
+
+        status code 
+                success  2XX
+                        create, update => 201
+                        other => 200
+                        if you confuse  use 200
+                error  4XX
+                        if you confuse use 400
+                        404  not found
+       
+
+
+
+
+
+
+// part 2   (play with database)
+Day 5
+        connect to mongodb databse
+                mongoose
+                give databse name
+                replace localhost by 0.0.0.0
+                explain asyn await with try catch
+                handle error, page not found 
+                {name:"Laptop", price:100000, quantity:10 ,isDamage:false}
+        Schema
+                mongodb data type are in capital letter
+                String, Number, Boolean, Date, Schema.ObjectId
+                always use make table name as first letter capital
+                product(name, price, quantity), user(name, email, password, gender), job(title,location , salary)
+        Assignment 
+                mongodb vidoes
+                https://drive.google.com/file/d/1aVg201ZSJUGBQr5qsXtXBNo4yHqH_7Vw/view?usp=drive_link
+
+Day 6
+
+        Route
+                product 
+                        create
+                                see data 
+                                mongodb community Vs mongodb compass 
+                                mongodb compass 
+                                        use ctr+r to see latest data (refresh)
+                                {timestamps:true}
+                                
+                                async await 
+                                throw error, handle error using try catch 
+                                note while adding data postman data must be sink with schema and is CASE SENSITIVE
+                                send response
+                                make controller in different file
+
+Day 7 
+        product 
+                get
+                express-async-handler    to handle error 
+                make error middleware , always place error middleware at last
+                make controller for get and create and
+                product 
+                get specific 
+                update 
+                delete 
+                explain null (data will be null if there is no data)
+                explain whole again and check other code 
+                postman
+                        make diffent file for different request
+                        make variable
+                        use variable
+                implementation of expressasync handler package
+        Assignment 
+                user(name, email, password), job(title,location , salary)
+                schema, controller,route, index
+                //for practice   location  (country,district, province, muncipality, wardNo)
+
+Day 8 
+                schema, controller,route, index
+
+//part 3  (main for project)
+
+Day 9 
+        Revision from scratch
+                Product => name, price, quantity, isDamage
+                                use timestamps:true
+                User    =>name, email, password, profileImage
+                        add unique:true
+                Review => product, user, description
+                schema => controller => route => index
+
+Day 10 
+        variable concept in postman 
+        remove _id and and id
+
+        make all product ,user, review 
+        ref  
+                Schema.ObjectId, ref:TableName
+                populate field
+        assignment  (in express 1)
+                student => name , roll, class
+                teacher => name, subject
+//part 4
+Day 11
+        discussion 
+                address => county, province, district, municipality, ward, exactLocation
+                Playlist Joi validation (full playlist)
+
+Day 12
+        Schema Design for student
+                {
+    "name": "c",  {type:String}
+    "password":"Password@123",
+    "email": "abc@gmai",
+    "phoneNumber": 1111111111,
+    "roll": 2,
+    "isMarried": false,
+    "gender": "male",
+    "dob": "2019-2-2", 
+    "location": {
+        "country": "nepal"
+        "exactLocation": "gagalphedi"
+    },
+    "favTeacher": [
+        "a",
+        "b",
+        "c",
+        "nitan",
+        1
+
+    ],
+
+
+
+    "favSubject": [
+        {
+            "bookName": "javascript",
+            "bookAuthor": "nitan"
+        },
+        {
+            "bookName": "b",
+            "bookAuthor": "b"
+        }
+    ]
+}
+        validation 
+        regex validation
+
+Day 13 
+        searchng
+         find 
+         findOne
+         select 
+        sort 
+        limit
+        skip
+        control find, select from postman
+
+
+assignment
+?name=nitan&password=pass&select=name email
+?name=nitan&password=pass&select=name email&limit=3&skip2
+?name=nitan&password=pass&select=name email&limit=3&skip2&sort="name"
+find the latest data
+
+Day 14
+        hashing 
+        implement hashing
+        why 10
+        
+
+Day 15 
+        implement error middleware status code and implement in express main
+        token
+                npm i jsonwebtoken
+                generate 
+                verify 
+                
+
+        implementation 
+                on login 
+                on my-profile
+
+
+
+        multer
+                implement multer in express main
+        send mail 
+        .env
+        cors
+
+
+
+
+       
+
+ 
+
+
+
+
+
+
+
+              
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+Question 
+    what does postman do 
+    what is api makin
+    how to define api in backend
+    what does app.use(json()) does 
+    it should be in (top or low level)
+    how can we send data from postman
+
+
+
+
+
+
+
+
+
+//for  regex searchin
+// [
+//    {name:"ni1t",age:29, isMarried:false},
+//     {name:"sand2inip",age:25, isMarried:false},
+//     {name:"ni",age:26, isMarried:true},
+//     {name:"ris3hav",age:20, isMarried:false},
+//     *{name:"nitan",age:29, isMarried:true},
+//     {name:"chhimi",age:15, isMarried:true},
+//     *{name:"narendran",age:27, isMarried:false},
+//     *{name:"Nitan",age:16, isMarried:false},
+//     {name:"nitanthapa",age:22, isMarried:false},
+// ]
+ 
+
+find({name:"nitan"})//exact searching
+
+find({name:})
+
+
+
+
+
+
+
+find({name:/nitan/})// regex searching => not exact searching
+find(name:/nitan/i)
+find(name:/ni/)
+find(name:/^ni/)
+find(name:/^ni/i)
+find(name:/n$/i)
+find(name:/^(?=.*[a-zA-Z])(?=.*\d).+/)
+
+find(name:/^(?=.*@)(?=.*_)|(?=.*_)(?=.*@)/)
+
+
+
+
+
+
+
+       
+
+ 
+
+
+
+
+
+
+
+              
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+Question 
+    what does postman do 
+    what is api makin
+    how to define api in backend
+    what does app.use(json()) does 
+    it should be in (top or low level)
+    how can we send data from postman
+    
+
+
