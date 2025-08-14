@@ -6,17 +6,30 @@ const productSchema = Schema(
       type: String,
       required: [true, "name is required."],
     },
-    price: {
-      type: Number,
-      required: [true, "price is required"],
-    },
     quantity: {
       type: Number,
       required: [true, "quantity is required"],
     },
-    isDamage: {
+    price: {
+      type: Number,
+      required: [true, "price is required"],
+    },
+    featured: {
       type: Boolean,
     },
+    productImage:{
+      type: String,
+      required: [true, "productImage is required"],
+    },
+    manufacturedDate:{
+      type: Date,
+      required:[true, "Manufactured date is required"]
+    },
+    company:{
+      type: String,
+      required:[true, "Company name is required"]
+    }
+
   },
   {
     timestamps: true,
